@@ -1,5 +1,5 @@
-﻿using Application.Common.Interfaces;
-using Domain.Entities;
+﻿using Application.Interfaces;
+using Domain;
 
 namespace Application;
 
@@ -14,9 +14,9 @@ public class BeerHandler : IBeerHandler // love the name
         _beerRepository = beerRepository;
     }
 
-    public async Task<List<Beer>> GetCheapestBeerPerLitre(string sourceUrl)
+    public async Task<IEnumerable<Beer>> GetCheapestBeer(string sourceUrl)
     {
-        var beers = await _beerRepository.GetByUrl(sourceUrl);
+        var beers = (List<Beer>)await _beerRepository.GetByUrl(sourceUrl);
         var minPricePerUnit = beers.SelectMany(beer => beer.Articles).Min(x => x.PricePerUnit);
         for (int i = beers.Count - 1; i >= 0; i--)
         {
@@ -33,9 +33,9 @@ public class BeerHandler : IBeerHandler // love the name
         return beers;
     }
 
-    public async Task<List<Beer>> GetMostExpensiveBeerPerLitre(string sourceUrl)
+    public async Task<IEnumerable<Beer>> GetMostExpensiveBeer(string sourceUrl)
     {
-        var beers = await _beerRepository.GetByUrl(sourceUrl);
+        var beers = (List<Beer>)await _beerRepository.GetByUrl(sourceUrl);
         var minPricePerUnit = beers.SelectMany(beer => beer.Articles).Max(x => x.PricePerUnit);
         for (int i = beers.Count - 1; i >= 0; i--)
         {
@@ -52,7 +52,7 @@ public class BeerHandler : IBeerHandler // love the name
         return beers;
     }
 
-    public async Task<List<Beer>> GetByPrice(decimal price, string sourceUrl)
+    public async Task<IEnumerable<Beer>> GetByPrice(decimal price, string sourceUrl)
     {
         var beers = (List<Beer>)await _beerRepository.GetByUrl(sourceUrl);
 
@@ -76,9 +76,9 @@ public class BeerHandler : IBeerHandler // love the name
         return beers;
     }
 
-    public async Task<List<Beer>> GetMostBottles(string sourceUrl)
+    public async Task<IEnumerable<Beer>> GetMostBottles(string sourceUrl)
     {
-        var beers = await _beerRepository.GetByUrl(sourceUrl);
+        var beers = (List<Beer>)await _beerRepository.GetByUrl(sourceUrl);
         var highestBottleAmount = beers.SelectMany(beer => beer.Articles).Max(article => article.BottleAmount);
 
         for (int i = beers.Count - 1; i >= 0; i--)

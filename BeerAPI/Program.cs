@@ -1,6 +1,6 @@
 using Application;
-using Application.Common.Interfaces;
-using Domain.Entities;
+using Application.Interfaces;
+using Domain;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,7 +22,7 @@ if (app.Environment.IsDevelopment())
 
 app.MapGet("beers/cheapest-and-most-expensive-per-litre", async ([FromServices] BeerHandler beerHandler, [FromQuery] string sourceUrl) =>
 {
-    return Results.Json((await beerHandler.GetCheapestBeerPerLitre(sourceUrl)).Union(await beerHandler.GetMostExpensiveBeerPerLitre(sourceUrl)));
+    return Results.Json((await beerHandler.GetCheapestBeer(sourceUrl)).Union(await beerHandler.GetMostExpensiveBeer(sourceUrl)));
 });
 
 app.MapGet("beers/priced-seventeen-ninety-nine-euro", async ([FromServices] BeerHandler beerHandler, [FromQuery] string sourceUrl) =>
@@ -39,7 +39,7 @@ app.MapGet("beers/get-all-endpoints", async ([FromServices] BeerHandler beerHand
 {
     return Results.Json(new Dictionary<string, IEnumerable<Beer>>
     {
-        { "cheapestAndMostExpensivePerLitre", (await beerHandler.GetCheapestBeerPerLitre(sourceUrl)).Union(await beerHandler.GetMostExpensiveBeerPerLitre(sourceUrl)) },
+        { "cheapestAndMostExpensivePerLitre", (await beerHandler.GetCheapestBeer(sourceUrl)).Union(await beerHandler.GetMostExpensiveBeer(sourceUrl)) },
         { "seventeenNinetyNineEuroPerLitre", await beerHandler.GetByPrice(17.99M, sourceUrl) },
         { "mostBottles", await beerHandler.GetMostBottles(sourceUrl) }
     });

@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Domain.Entities;
+namespace Domain;
 
 public record Article(int Id, string ShortDescription, decimal Price, string Unit, string PricePerUnitText, string Image)
 {

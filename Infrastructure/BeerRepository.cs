@@ -1,5 +1,5 @@
-﻿using Application.Common.Interfaces;
-using Domain.Entities;
+﻿using Application.Interfaces;
+using Domain;
 using System.Text.Json;
 
 namespace Infrastructure;
@@ -10,9 +10,9 @@ public class BeerRepository : IBeerRepository
 {
     private readonly HttpClient _httpClient = new();
 
-    public async Task<List<Beer>> GetByUrl(string url)
+    public async Task<IEnumerable<Beer>> GetByUrl(string url)
     {
         var stream = await _httpClient.GetStreamAsync(url);
-        return await JsonSerializer.DeserializeAsync<List<Beer>>(stream, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }); ;
+        return await JsonSerializer.DeserializeAsync<IEnumerable<Beer>>(stream, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }); ;
     }
 }

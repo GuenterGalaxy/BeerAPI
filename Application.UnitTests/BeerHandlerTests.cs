@@ -1,5 +1,5 @@
-using Application.Common.Interfaces;
-using Domain.Entities;
+using Application.Interfaces;
+using Domain;
 using FluentAssertions;
 using NSubstitute;
 
@@ -41,7 +41,5 @@ namespace Application.UnitTests
             // Assert
             beersByPrice.Select(x => x.Articles.Select(x => x.PricePerUnit).Should().BeInAscendingOrder());
         }
-
-        //TODO: More test coverage
     }
 }
