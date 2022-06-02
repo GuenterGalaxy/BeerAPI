@@ -39,7 +39,10 @@ namespace Application.UnitTests
             var beersByPrice = await _beerHandler.GetByPrice(17.99M, "");
 
             // Assert
-            beersByPrice.Select(x => x.Articles.Select(x => x.PricePerUnit).Should().BeInAscendingOrder());
+            foreach (var beer in beersByPrice)
+            {
+                beer.Articles.Select(article => article.PricePerUnit).Should().BeInAscendingOrder();
+            }
         }
     }
 }

@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "BeerAPI\API.csproj", "{8331FE74-A395-4963-97BB-956C16FD19CD}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{36F4EE41-0C56-4D20-B397-BBAA2ADB2B18}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C4F0BDBD-FA78-4A2D-B748-215951B1C564}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Model\Domain.csproj", "{38C78227-C5C6-44F7-A52B-7D55D92E015D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Model\Domain.csproj", "{38C78227-C5C6-44F7-A52B-7D55D92E015D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{03610313-1AED-4BE7-9297-4D26F38F34EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{03610313-1AED-4BE7-9297-4D26F38F34EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{02471D15-0E5F-420E-B5ED-D08AE68930A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{02471D15-0E5F-420E-B5ED-D08AE68930A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.UnitTests", "Application.UnitTests\Application.UnitTests.csproj", "{6AB830BB-34A3-4FE8-A39B-3FDA38898419}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.UnitTests", "Application.UnitTests\Application.UnitTests.csproj", "{6AB830BB-34A3-4FE8-A39B-3FDA38898419}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{7E1CD1CB-1D15-4DE0-9A34-40DBE30F1F45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8331FE74-A395-4963-97BB-956C16FD19CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8331FE74-A395-4963-97BB-956C16FD19CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8331FE74-A395-4963-97BB-956C16FD19CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8331FE74-A395-4963-97BB-956C16FD19CD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{38C78227-C5C6-44F7-A52B-7D55D92E015D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{38C78227-C5C6-44F7-A52B-7D55D92E015D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38C78227-C5C6-44F7-A52B-7D55D92E015D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -43,16 +39,20 @@ Global
 		{6AB830BB-34A3-4FE8-A39B-3FDA38898419}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AB830BB-34A3-4FE8-A39B-3FDA38898419}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AB830BB-34A3-4FE8-A39B-3FDA38898419}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E1CD1CB-1D15-4DE0-9A34-40DBE30F1F45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E1CD1CB-1D15-4DE0-9A34-40DBE30F1F45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E1CD1CB-1D15-4DE0-9A34-40DBE30F1F45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E1CD1CB-1D15-4DE0-9A34-40DBE30F1F45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{8331FE74-A395-4963-97BB-956C16FD19CD} = {36F4EE41-0C56-4D20-B397-BBAA2ADB2B18}
 		{38C78227-C5C6-44F7-A52B-7D55D92E015D} = {36F4EE41-0C56-4D20-B397-BBAA2ADB2B18}
 		{03610313-1AED-4BE7-9297-4D26F38F34EB} = {36F4EE41-0C56-4D20-B397-BBAA2ADB2B18}
 		{02471D15-0E5F-420E-B5ED-D08AE68930A9} = {36F4EE41-0C56-4D20-B397-BBAA2ADB2B18}
 		{6AB830BB-34A3-4FE8-A39B-3FDA38898419} = {C4F0BDBD-FA78-4A2D-B748-215951B1C564}
+		{7E1CD1CB-1D15-4DE0-9A34-40DBE30F1F45} = {36F4EE41-0C56-4D20-B397-BBAA2ADB2B18}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C0D73C48-2105-428E-BB28-B5723573FCA4}
