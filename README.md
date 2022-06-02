@@ -8,4 +8,4 @@ Minimal API that reads a beer JSON from a URL and offers the following endpoints
 All endpoints return in JSON format.
 
 # Missing
-- More test coverage.
+- More test coverage
