@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<IBeerRepository, BeerRepository>();
-builder.Services.AddSingleton<BeerHandler>();
+builder.Services.AddSingleton<IBeerHandler, BeerHandler>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -23,29 +23,27 @@ if (app.Environment.IsDevelopment())
 
 app.UseExceptionHandler(c => c.Run(async context =>
 {
-    var exception = context.Features
-        .Get<IExceptionHandlerPathFeature>()
-        .Error;
-    var response = new { error = exception.Message };
+    var exception = context.Features.Get<IExceptionHandlerPathFeature>()?.Error;
+    var response = new { error = exception?.Message };
     await context.Response.WriteAsJsonAsync(response);
 }));
 
-app.MapGet("beers/cheapest-and-most-expensive-per-litre", async ([FromServices] BeerHandler beerHandler, [FromQuery] string sourceUrl) =>
+app.MapGet("beers/cheapest-and-most-expensive-per-litre", async ([FromServices] IBeerHandler beerHandler, [FromQuery] string sourceUrl) =>
 {
     return Results.Json((await beerHandler.GetCheapestBeer(sourceUrl)).Union(await beerHandler.GetMostExpensiveBeer(sourceUrl)));
 });
 
-app.MapGet("beers/priced-seventeen-ninety-nine-euro", async ([FromServices] BeerHandler beerHandler, [FromQuery] string sourceUrl) =>
+app.MapGet("beers/priced-seventeen-ninety-nine-euro", async ([FromServices] IBeerHandler beerHandler, [FromQuery] string sourceUrl) =>
 {
     return Results.Json(await beerHandler.GetByPrice(17.99M, sourceUrl));
 });
 
-app.MapGet("beers/most-bottles", async ([FromServices] BeerHandler beerHandler, [FromQuery] string sourceUrl) =>
+app.MapGet("beers/most-bottles", async ([FromServices] IBeerHandler beerHandler, [FromQuery] string sourceUrl) =>
 {
     return Results.Json(await beerHandler.GetMostBottles(sourceUrl));
 });
 
-app.MapGet("beers/get-all-endpoints", async ([FromServices] BeerHandler beerHandler, [FromQuery] string sourceUrl) =>
+app.MapGet("beers/get-all-endpoints", async ([FromServices] IBeerHandler beerHandler, [FromQuery] string sourceUrl) =>
 {
     return Results.Json(new Dictionary<string, IEnumerable<Beer>>
     {

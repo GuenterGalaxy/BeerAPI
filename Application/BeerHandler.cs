@@ -3,8 +3,6 @@ using Domain;
 
 namespace Application;
 
-#nullable disable
-
 public class BeerHandler : IBeerHandler // love the name
 {
     private readonly IBeerRepository _beerRepository;
