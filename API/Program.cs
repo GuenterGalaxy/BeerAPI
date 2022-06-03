@@ -2,6 +2,7 @@ using Application;
 using Application.Interfaces;
 using Domain;
 using Infrastructure;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseExceptionHandler(c => c.Run(async context =>
+{
+    var exception = context.Features
+        .Get<IExceptionHandlerPathFeature>()
+        .Error;
+    var response = new { error = exception.Message };
+    await context.Response.WriteAsJsonAsync(response);
+}));
 
 app.MapGet("beers/cheapest-and-most-expensive-per-litre", async ([FromServices] BeerHandler beerHandler, [FromQuery] string sourceUrl) =>
 {
