@@ -21,7 +21,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseExceptionHandler(c => c.Run(async context =>
+app.UseExceptionHandler(builder => builder.Run(async context =>
 {
     var exception = context.Features.Get<IExceptionHandlerPathFeature>()?.Error;
     var response = new { error = exception?.Message };
