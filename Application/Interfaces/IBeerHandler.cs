@@ -4,9 +4,9 @@ namespace Application.Interfaces
 {
     public interface IBeerHandler
     {
-        Task<IEnumerable<Beer>> GetByPrice(decimal price, string sourceUrl);
-        Task<IEnumerable<Beer>> GetCheapestBeer(string sourceUrl);
-        Task<IEnumerable<Beer>> GetMostBottles(string sourceUrl);
-        Task<IEnumerable<Beer>> GetMostExpensiveBeer(string sourceUrl);
+        Task<IEnumerable<Beer>> GetByPriceAsync(decimal price, string sourceUrl);
+        Task<IEnumerable<Beer>> GetCheapestBeerAsync(string sourceUrl);
+        Task<IEnumerable<Beer>> GetMostBottlesAsync(string sourceUrl);
+        Task<IEnumerable<Beer>> GetMostExpensiveBeerAsync(string sourceUrl);
     }
 }

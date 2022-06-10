@@ -12,10 +12,13 @@ public class BeerHandler : IBeerHandler // love the name
         _beerRepository = beerRepository;
     }
 
-    public async Task<IEnumerable<Beer>> GetCheapestBeer(string sourceUrl)
+    public async Task<IEnumerable<Beer>> GetCheapestBeerAsync(string sourceUrl)
     {
         var beers = (List<Beer>)await _beerRepository.GetByUrl(sourceUrl);
-        var minPricePerUnit = beers.SelectMany(beer => beer.Articles).Min(x => x.PricePerUnit);
+        var minPricePerUnit = beers
+            .SelectMany(beer => beer.Articles)
+            .Min(beer => beer.PricePerUnit);
+
         for (int i = beers.Count - 1; i >= 0; i--)
         {
             var beer = beers[i];
@@ -31,10 +34,13 @@ public class BeerHandler : IBeerHandler // love the name
         return beers;
     }
 
-    public async Task<IEnumerable<Beer>> GetMostExpensiveBeer(string sourceUrl)
+    public async Task<IEnumerable<Beer>> GetMostExpensiveBeerAsync(string sourceUrl)
     {
         var beers = (List<Beer>)await _beerRepository.GetByUrl(sourceUrl);
-        var minPricePerUnit = beers.SelectMany(beer => beer.Articles).Max(x => x.PricePerUnit);
+        var minPricePerUnit = beers
+            .SelectMany(beer => beer.Articles)
+            .Max(beer => beer.PricePerUnit);
+
         for (int i = beers.Count - 1; i >= 0; i--)
         {
             var beer = beers[i];
@@ -50,7 +56,7 @@ public class BeerHandler : IBeerHandler // love the name
         return beers;
     }
 
-    public async Task<IEnumerable<Beer>> GetByPrice(decimal price, string sourceUrl)
+    public async Task<IEnumerable<Beer>> GetByPriceAsync(decimal price, string sourceUrl)
     {
         var beers = (List<Beer>)await _beerRepository.GetByUrl(sourceUrl);
 
@@ -66,18 +72,21 @@ public class BeerHandler : IBeerHandler // love the name
                 continue;
             }
 
-            beer.Articles.Sort((x, y) => Nullable.Compare(x.PricePerUnit, y.PricePerUnit));
+            beer.Articles.Sort((currentArticle, nextArticle) => Nullable.Compare(currentArticle.PricePerUnit, nextArticle.PricePerUnit));
         }
 
-        beers.Sort((x, y) => Nullable.Compare(x.Articles.Min(article => article.PricePerUnit), y.Articles.Min(article => article.PricePerUnit)));
+        beers.Sort((currentBeer, nextBeer) => Nullable.Compare( currentBeer.Articles.Min(article => article.PricePerUnit), 
+                                                                nextBeer.Articles.Min(article => article.PricePerUnit)));
 
         return beers;
     }
 
-    public async Task<IEnumerable<Beer>> GetMostBottles(string sourceUrl)
+    public async Task<IEnumerable<Beer>> GetMostBottlesAsync(string sourceUrl)
     {
         var beers = (List<Beer>)await _beerRepository.GetByUrl(sourceUrl);
-        var highestBottleAmount = beers.SelectMany(beer => beer.Articles).Max(article => article.BottleAmount);
+        var highestBottleAmount = beers
+            .SelectMany(beer => beer.Articles)
+            .Max(article => article.BottleAmount);
 
         for (int i = beers.Count - 1; i >= 0; i--)
         {

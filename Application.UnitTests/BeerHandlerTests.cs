@@ -36,7 +36,7 @@ namespace Application.UnitTests
             _beerRepository.GetByUrl("").Returns(data);
 
             // Act
-            var beersByPrice = await _beerHandler.GetByPrice(17.99M, "");
+            var beersByPrice = await _beerHandler.GetByPriceAsync(17.99M, "");
 
             // Assert
             foreach (var beer in beersByPrice)
