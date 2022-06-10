@@ -75,7 +75,7 @@ public class BeerHandler : IBeerHandler // love the name
             beer.Articles.Sort((currentArticle, nextArticle) => Nullable.Compare(currentArticle.PricePerUnit, nextArticle.PricePerUnit));
         }
 
-        beers.Sort((currentBeer, nextBeer) => Nullable.Compare( currentBeer.Articles.Min(article => article.PricePerUnit), 
+        beers.Sort((currentBeer, nextBeer) => Nullable.Compare(currentBeer.Articles.Min(article => article.PricePerUnit),
                                                                 nextBeer.Articles.Min(article => article.PricePerUnit)));
 
         return beers;

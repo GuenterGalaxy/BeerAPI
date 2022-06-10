@@ -11,7 +11,6 @@ builder.Services.AddApiServices();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -52,7 +51,7 @@ app.MapGet("beers/get-all-endpoints", async ([FromServices] IBeerHandler beerHan
 
 app.Run();
 
-async Task<IEnumerable<Beer>> CombineCheapestAndMostExpensiveBeer(IBeerHandler beerHandler, string sourceUrl)
+static async Task<IEnumerable<Beer>> CombineCheapestAndMostExpensiveBeer(IBeerHandler beerHandler, string sourceUrl)
 {
     return (await beerHandler.GetCheapestBeerAsync(sourceUrl)).Union(await beerHandler.GetMostExpensiveBeerAsync(sourceUrl));
 }

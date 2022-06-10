@@ -14,7 +14,9 @@ public class BeerRepository : IBeerRepository
         try
         {
             var stream = await _httpClient.GetStreamAsync(url);
-            return await JsonSerializer.DeserializeAsync<IEnumerable<Beer>>(stream, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new List<Beer>();
+            var jsonOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            var beers = await JsonSerializer.DeserializeAsync<IEnumerable<Beer>>(stream, jsonOptions) ?? new List<Beer>();
+            return beers;
         }
         catch (InvalidOperationException ex)
         {
